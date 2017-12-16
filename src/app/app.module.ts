@@ -12,10 +12,12 @@ import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldMo
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import 'hammerjs';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
     MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule,
