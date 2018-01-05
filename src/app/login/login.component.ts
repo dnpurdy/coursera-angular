@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   user = {remember: false};
 
-  constructor(private dialogRef: MatDialogRef<LoginCompoent>) { }
+  constructor(private dialogRef: MatDialogRef<LoginComponent>) { }
 
   ngOnInit() {
   }
