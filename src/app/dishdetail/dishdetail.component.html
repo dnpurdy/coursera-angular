@@ -31,14 +31,44 @@
   </div>
 
   <div fxFlex="40" *ngIf="dish">
-    <h3>Comments</h3>
+
     <mat-list fxFlex>
+      <h3>Comments</h3>
       <mat-list-item *ngFor="let comment of dish.comments">
         <p mat-line>{{comment.comment}}</p>
         <p mat-line>{{comment.rating}} stars</p>
         <p mat-line>-- {{comment.author}} {{comment.date | date}}</p>
       </mat-list-item>
+      <mat-list-item *ngIf="feedbackForm.valid">
+        <p mat-line>{{feedbackForm.value.comment}}</p>
+        <p mat-line>{{feedbackForm.value.rating}} stars</p>
+        <p mat-line>-- {{feedbackForm.value.author}}</p>
+      </mat-list-item>
+      <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-input-container class="full-width" dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+            <input matInput formControlName="author" placeholder="Name" type="text" required>
+            <mat-hint>
+                <span [hidden]="!(formErrors.author)">{{formErrors.author}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
+        <mat-slider formControlName="rating" tickInterval="1" thumbLabel min="1" max="5" step="1" value="4"></mat-slider>
+        <p>
+          <mat-input-container class="full-width"
+                               dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
+            <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+            <mat-hint>
+                <span [hidden]="!(formErrors.comment)">
+                  {{formErrors.comment}}</span>
+            </mat-hint>
+          </mat-input-container>
+        </p>
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
+      </form>
     </mat-list>
+
+
   </div>
 
   <div [hidden]="dish">
