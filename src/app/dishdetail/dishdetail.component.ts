@@ -18,6 +18,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
+  dishcopy: Dish = null;
   dishIds: number[];
   feedbackForm: FormGroup;
   comment: Comment;
@@ -50,8 +51,8 @@ export class DishdetailComponent implements OnInit {
       .subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
       .switchMap((params: Params) => this.dishService.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
-        errmess => this.errMess = <any>errmess);
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+        errmess => { this.dish = null; this.errMess = <any>errmess; });
   }
 
   createForm() {
@@ -70,7 +71,10 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     const comment: Comment = this.feedbackForm.value;
     comment.date = new Date().toISOString();
-    this.dish.comments.push(comment)
+    this.dish.comments.push(comment);
+    this.dishcopy.comments.push(comment);
+    this.dishcopy.save()
+      .subscribe(dish => { this.dish = dish; console.log(this.dish); });
     this.feedbackForm.reset({
       author: '',
       rating: 5,
