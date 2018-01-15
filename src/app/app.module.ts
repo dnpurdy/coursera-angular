@@ -9,6 +9,9 @@ import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldMo
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
 
 import { baseURL } from './shared/baseurl';
 
@@ -49,7 +52,8 @@ import { LoginComponent } from './login/login.component';
     MatSlideToggleModule, MatToolbarModule, MatListModule, MatGridListModule,
     MatCardModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule, FlexLayoutModule,
     BrowserModule, BrowserAnimationsModule, FormsModule,
-    AppRoutingModule, ReactiveFormsModule, HttpModule
+    AppRoutingModule, ReactiveFormsModule,
+    HttpModule, RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [
     DishService,
