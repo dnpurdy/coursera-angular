@@ -5,7 +5,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 describe('ProcessHttpmsgService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ProcessHttpmsgService]
+      providers: [ProcessHTTPMsgService]
     });
   });
 
