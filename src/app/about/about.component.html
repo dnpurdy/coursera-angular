@@ -54,11 +54,11 @@
   </div>
 
 
-  <div fxFlex *ngIf="leaders">
+  <div fxFlex *ngIf="leaders" [@expand]>
     <h2>Corporate Leadership</h2>
     <mat-list cols="2" rowHeight="200px">
       <mat-list-item *ngFor="let leader of leaders" [routerLink]="['/leader', leader.id]">
-        <img matListAvatar src={{leader.image}} alt={{leader.name}}>
+        <img matListAvatar src="{{BaseURL + leader.image}}" alt={{leader.name}}>
         <h3 matLine> {{leader.name}} {{leader.abbr}}</h3>
         <p matLine>
           <span> {{leader.designation}} </span>
