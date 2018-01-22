@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
   feedback: Feedback = null;
   contactType = ContactType;
   isProcessingSubmit = false;
-
+  errMesg: string;
   formErrors = {
     'firstname': '',
     'lastname': '',
@@ -81,21 +81,25 @@ export class ContactComponent implements OnInit {
     this.feedbackService
       .submitFeedback(this.feedbackForm.value)
       .subscribe(feedback => {
-        this.feedback = feedback;
-        this.isProcessingSubmit = false;
-        setTimeout(handler => {
-          this.feedbackForm.reset({
-            firstname: '',
-            lastname: '',
-            telnum: '',
-            email: '',
-            agree: false,
-            contacttype: 'None',
-            message: ''
-          });
-          this.feedback = null;
-        }, 5000);
-      });
+          this.feedback = feedback;
+          this.isProcessingSubmit = false;
+          setTimeout(handler => {
+            this.feedbackForm.reset({
+              firstname: '',
+              lastname: '',
+              telnum: '',
+              email: '',
+              agree: false,
+              contacttype: 'None',
+              message: ''
+            });
+            this.feedback = null;
+          }, 5000);
+        },
+        error => {
+          this.submitting = false;
+          this.errMess = <any>error;
+        });
   }
 
   onValueChanged(data?: any) {

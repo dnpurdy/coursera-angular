@@ -48,7 +48,7 @@
       <p>How?: {{feedback.contacttype}}</p>
       <p>Feedback: {{feedback.message}}</p>
     </div>
-    <form *ngIf="!isProcessingSubmit && !feedback" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [@expand]>
+    <form *ngIf="!isProcessingSubmit && !feedback && !errMesg" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [@expand]>
       <p>
         <mat-input-container class="half-width"
                             dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
@@ -106,6 +106,10 @@
     </form>
     <div *ngIf="isProcessingSubmit" [@expand]>
       <mat-spinner></mat-spinner><h4>Submitting Feedback</h4>
+    </div>
+    <div *ngIf="errMesg">
+      <h2>Error</h2>
+      <h4>{{errMesg}}</h4>
     </div>
   </div>
 </div>
